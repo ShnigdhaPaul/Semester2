@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+typedef struct ListNode
+{
+   int data;
+   struct ListNode *prev;
+   struct ListNode *next;
+};
+ListNode *head = NULL;
+ListNode *last = NULL;
+void insert(int newdata)
+ {
+   if(head ==  NULL)
+   {
+       ListNode *nwnd = new ListNode;
+       nwnd -> data = newdata;
+       nwnd -> prev = NULL;
+       nwnd -> next = NULL;
+       head = nwnd;
+       last = nwnd;
+   }
+   else
+   {
+       ListNode *ptr;
+       ptr = head;
+       while (ptr -> next != NULL)
+       {
+           ptr = ptr -> next;
+       }
+       ListNode *nwnd = new ListNode;
+       nwnd -> data = newdata;
+       ptr -> next = nwnd;
+       nwnd -> prev = ptr;
+       nwnd -> next = NULL;
+        last = nwnd;
+   }
+}
+void display()
+{
+    ListNode *ptr = head;
+while( ptr != NULL)
+    {
+      cout<< ptr->data <<" ";
+      ptr = ptr -> next;
+    }
+
+}
+
+void print_backward()
+{
+     ListNode *ptr = last;
+    while(ptr != NULL)
+    {
+        cout << ptr -> data  << " " ;
+                ptr = ptr -> prev;
+    }
+}
+
+int main()
+{
+     int a, i;
+     while (1)
+     {
+         cout << "Enter element or press 0 for stop inserting element : ";
+         cin >> a;
+         if (a == 0) break;
+         else
+         {
+             insert (a);
+         }
+    }
+do
+{
+    cout << "1. Display list inorder. " << endl;
+    cout << "2. Display list in reverse order. " << endl;
+    cout << "Press 3 for EXIT" << endl;
+    cout << "enter your choice: ";
+    cin >> i;
+    switch (i)
+    {
+    case 1:
+        display();
+        cout << endl << endl;
+        break;
+    case 2:
+         print_backward();
+         cout << endl << endl;
+         break;
+    case 3:
+        break;
+    default:
+        cout << "Wrong input " << endl << endl;
+    }
+} while (i != 3);
+   return 0;
+}
